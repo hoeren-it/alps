@@ -11,7 +11,7 @@ trusted_origins = ["https://webmail.hoeren-it.de"]
 type = "imap"
 
 [provider.imap]
-server = "imaps://mail.hoeren-it.de:993"
+server = "imaps://mail.hoeren-it.de:1993"
 
 [smtp]
-server = "smtps://mail.hoeren-it.de:465"
+server = "smtps://mail.hoeren-it.de:1465"

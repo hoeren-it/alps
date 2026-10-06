@@ -6,7 +6,7 @@ services:
     restart: unless-stopped
     init: true
     extra_hosts:
-      - "mail.hoeren-it.de:46.38.254.200"
+      - "mail.hoeren-it.de:172.18.0.25"
     env_file:
       - .env
     environment:
