@@ -5,6 +5,8 @@ services:
       dockerfile: Dockerfile
     restart: unless-stopped
     init: true
+    extra_hosts:
+      - "mail.hoeren-it.de:46.38.254.200"
     env_file:
       - .env
     environment:
