@@ -9,6 +9,8 @@ services:
       - .env
     environment:
       TZ: Europe/Berlin
+    extra_hosts:
+      - "mail.hoeren-it.de:46.38.254.200"
     expose:
       - "1323"
     security_opt:
