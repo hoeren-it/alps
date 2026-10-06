@@ -1,0 +1,42 @@
+services:
+  alps:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    init: true
+    env_file:
+      - .env
+    environment:
+      TZ: Europe/Berlin
+    expose:
+      - "1323"
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=512m
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:1323/"]
+      interval: 30s
+      timeout: 5s
+      start_period: 15s
+      retries: 3
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.alps.entrypoints=https"
+      - "traefik.http.routers.alps.rule=Host(`webmail.hoeren-it.de`)"
+      - "traefik.http.routers.alps.tls=true"
+      - "traefik.http.routers.alps.tls.options=modern@file"
+      - "traefik.http.routers.alps.tls.certresolver=letsEncrypt"
+      - "traefik.http.routers.alps.middlewares=default@file"
+      - "traefik.http.services.alps.loadbalancer.server.port=1323"
+      - "traefik.docker.network=traefik_net"
+    networks:
+      - traefik_net
+
+networks:
+  traefik_net:
+    name: traefik_net
+    external: true

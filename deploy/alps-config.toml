@@ -1,0 +1,17 @@
+[server]
+addr = ":1323"
+debug = false
+
+# Traefik's Docker network on the hoeren-it VPS. Restrict forwarded-header trust
+# to this network so ALPS can use the original client IP and HTTPS origin safely.
+trusted_proxies = ["172.18.0.0/16"]
+trusted_origins = ["https://webmail.hoeren-it.de"]
+
+[provider]
+type = "imap"
+
+[provider.imap]
+server = "imaps://mail.hoeren-it.de:993"
+
+[smtp]
+server = "smtps://mail.hoeren-it.de:465"

@@ -1,4 +1,5 @@
 config.toml
+.env
 tmp/*
 vendor/
 build/
